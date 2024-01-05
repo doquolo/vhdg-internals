@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css')}}">
+    <script src="{{ url_for('static', filename='js/index.js')}}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="subcontainer" id="menu-section">
+            <div class="subsection" id="menu-list">
+                <div class="item" onclick="addToList(this, 1)">Gà nướng</div>
+                <div class="item" onclick="addToList(this, 2)">Gà xào</div>
+                <div class="item" onclick="addToList(this, 3)">Gà chiên</div>
+            </div>
+        </div>
+        <div class="vsep"></div>
+        <div class="subcontainer" id="checkout-section">
+            <div class="subsection" id="checkout-list" style="height: 90vh;">
+                <div class="item">gà nướng</div>
+                <div class="item">gà xào</div>
+                <div class="item">gà chiên</div>
+            </div>
+            <div class="subsection button" id="checkout-button">Checkout</div>
+        </div>
+    </div>
+</body>
+</html>
