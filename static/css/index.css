@@ -11,6 +11,9 @@ html, body {
 }
 
 .container {
+    position: fixed;
+    height: 90vh;
+    width: 95vw;
     display: flex;
     border: solid 1px white;
     border-radius: 20px;
@@ -22,7 +25,6 @@ html, body {
     height: 85vh;
     width: 45vw;
     flex-direction: column;
-    /* flex-wrap: wrap; */
     align-items: center;
 }
 
@@ -98,4 +100,16 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.popup {
+    backdrop-filter: brightness(50%);
+    align-items: center;
+    justify-content: center;
+}
+
+#checkout-menu {
+    width: 30vw;
+    height: 70vh;
+    background-color: white;
 }

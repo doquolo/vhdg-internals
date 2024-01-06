@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
     initList();
 });
 
+// prevent zooming
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
+document.ondblclick = function(e) {
+    e.preventDefault();
+}
+
 async function initList() {
     const menu_list = document.querySelector("#menu-list");
     menu_list.innerHTML = "";

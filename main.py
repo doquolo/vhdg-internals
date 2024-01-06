@@ -29,5 +29,7 @@ def price():
     with open("data/foodlist.json", "r", encoding="utf-8") as file:
         food_obj = json.loads(file.read())
         return food_obj[id]["price"]
+    
+
 
 app.run("0.0.0.0", 80, True)
