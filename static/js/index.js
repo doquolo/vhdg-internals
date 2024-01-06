@@ -76,3 +76,11 @@ async function updateList() {
     </div>
         `;
 }
+
+const hideCheckout = () => {
+    document.querySelector("body > div.container.popup").style.display = "none"
+}
+
+const showCheckout = () => {
+    document.querySelector("body > div.container.popup").style.display = "flex"
+}
