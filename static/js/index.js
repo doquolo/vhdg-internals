@@ -1,4 +1,5 @@
 var foodlist = {}
+var sum = 0
 
 document.addEventListener("DOMContentLoaded", () => {
     initList();
@@ -26,9 +27,13 @@ async function initList() {
     }
 }
 
-const addToList = (food, id) => {
+async function getPrice(id) {
+    return await (await fetch(`/price?id=${id}`)).json()
+}
+
+async function addToList(food, id) {
     if (foodlist[id] == undefined) {
-        foodlist[id] = {'name': food.textContent, 'price': 0, 'amount': 1}
+        foodlist[id] = {'name': food.textContent, 'price': await getPrice(id), 'amount': 1}
     } else {
         foodlist[id]['amount'] += 1; // add up to 1
     }
@@ -48,7 +53,22 @@ const substractFood = (id) => {
 
 async function updateList() {
     const checkout_list = document.querySelector("#checkout-list");
-    checkout_list.innerHTML = `<div class="item header">
+    await prepareList(checkout_list);
+}
+
+async function updateReceipt() {
+    const receipt_list = document.querySelector("#receipt")
+    await prepareList(receipt_list);
+    receipt_list.innerHTML = `
+    <div class="item header" style="border: none">
+        <div class="text" id="id">ID: <div>${Date.now()}</div></div>
+    </div>
+    ` 
+    + receipt_list.innerHTML;
+}
+
+async function prepareList(list_object) {
+    list_object.innerHTML = `<div class="item header">
     <div class="text">Món ăn</div>
     <div class="price">Đơn giá</div>
     <div class="price">Tổng</div>
@@ -59,7 +79,7 @@ async function updateList() {
         const subtotal = Number(foodlist[i]["amount"]) * price;
         total += subtotal;
 
-        checkout_list.innerHTML += 
+        list_object.innerHTML += 
         `
         <div class="item" onclick="substractFood(${i})">
             <div class="text"><p>x${foodlist[i]["amount"]}</p><p>${foodlist[i]["name"]}</p></div>
@@ -68,13 +88,14 @@ async function updateList() {
         </div>
         `
     }
-    checkout_list.innerHTML += 
+    list_object.innerHTML += 
         `
-        <div class="item header">
+    <div class="item header">
         <div class="text">Tổng đơn</div>
-        <div class="price">${total}.000đ</div>
+        <div class="price" id="sum">${total}.000đ</div>
     </div>
         `;
+    sum = total; // for later access
 }
 
 const hideCheckout = () => {
@@ -82,5 +103,49 @@ const hideCheckout = () => {
 }
 
 const showCheckout = () => {
-    document.querySelector("body > div.container.popup").style.display = "flex"
+    if (JSON.stringify(foodlist) === "{}") {
+        alert("Hoá đơn không được để trống !");
+    } else {
+        document.querySelector("body > div.container.popup").style.display = "flex"
+        updateReceipt();
+    }
+}
+
+const handleCash = () => { 
+    const id = document.querySelector("#id > div").textContent;
+    fetch('/pay', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mode: "cash", id: id, data: foodlist})
+    }).then(res => res.json())
+    .then(res => console.log(res));
+
+    alert("Đã lưu giao dịch tiền mặt !");
+    location.reload();
+}
+const handleContactless = () => {
+    const id = document.querySelector("#id > div").textContent;
+    const beneficial_acc = {
+        bank_bin: "970407", // techcombank
+        acc_num: "19038668847011"
+    }
+    const receipt_info = {
+        id: id,
+        type: "compact2",
+        amount: sum*1000,
+        acc_name: "THANH TOAN DO AN VHDG"
+    }
+    document.querySelector("#contactless").innerHTML += `
+    <form action="/contactlesspay" method="post" enctype="multipart/form-data">
+        <img id="qrcode" src="https://img.vietqr.io/image/${beneficial_acc.bank_bin}-${beneficial_acc.acc_num}-${receipt_info.type}.jpg?amount=${receipt_info.amount}&addInfo=${receipt_info.id}&accountName=${receipt_info.acc_name}" alt="">
+        <input type="file" name="file" accept="image/*">
+        <br>
+        <textarea name="json_data" id="json_data" style="display: none;">${JSON.stringify({mode: "contactless", id: id, data: foodlist})}</textarea>
+        <br>
+        <input type="submit" value="Tải lên" onclick="this.form.submit(); alert('Đã lưu giao dịch chuyển khoản!'); location.redirect('/');">
+    </form>
+    `
 }
