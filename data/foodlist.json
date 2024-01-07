@@ -1,6 +1,46 @@
 {
-    "1": {"name": "Bánh Flan", "price": "10"},
-    "2": {"name": "Thạch Dừa", "price": "15"},
-    "3": {"name": "Trà Đá", "price": "5"},
-    "4": {"name": "Xôi Mặn", "price": "25"}
+    "1": {
+        "name": "X\u00f4i Kinh N\u1ea5u S\u1eed",
+        "price": "20"
+    },
+    "2": {
+        "name": "L\u1ecdc T\u1eafm M\u1eafm",
+        "price": "15"
+    },
+    "3": {
+        "name": "Tr\u00e9 Tr\u1ed9n",
+        "price": "23"
+    },
+    "4": {
+        "name": "Th\u1ecbt Xi\u00ean",
+        "price": "15"
+    },
+    "5": {
+        "name": "Combo 42k",
+        "price": "42"
+    },
+    "6": {
+        "name": "Combo 45k",
+        "price": "45"
+    },
+    "7": {
+        "name": "Combo 72k",
+        "price": "72"
+    },
+    "8": {
+        "name": "\u1ea8m D\u1eeba Th\u1ea1ch",
+        "price": "15"
+    },
+    "9": {
+        "name": "T\u1eafc Ch\u00e8",
+        "price": "10"
+    },
+    "10": {
+        "name": "Ch\u00e8 \u0110\u1edb",
+        "price": "5"
+    },
+    "11": {
+        "name": "Flan",
+        "price": "7"
+    }
 }
