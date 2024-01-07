@@ -129,8 +129,8 @@ const handleCash = () => {
 const handleContactless = () => {
     const id = document.querySelector("#id > div").textContent;
     const beneficial_acc = {
-        bank_bin: "970407", // techcombank
-        acc_num: "19038668847011"
+        bank_bin: "970422", // techcombank
+        acc_num: "0794574608"
     }
     const receipt_info = {
         id: id,
