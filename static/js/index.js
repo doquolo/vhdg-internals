@@ -138,7 +138,7 @@ const handleContactless = () => {
         amount: sum*1000,
         acc_name: "THANH TOAN DO AN VHDG"
     }
-    document.querySelector("#contactless").innerHTML += `
+    document.querySelector("#payment-info").innerHTML = `
     <form action="/contactlesspay" method="post" enctype="multipart/form-data">
         <img id="qrcode" src="https://img.vietqr.io/image/${beneficial_acc.bank_bin}-${beneficial_acc.acc_num}-${receipt_info.type}.jpg?amount=${receipt_info.amount}&addInfo=${receipt_info.id}&accountName=${receipt_info.acc_name}" alt="">
         <input type="file" name="file" accept="image/*">
