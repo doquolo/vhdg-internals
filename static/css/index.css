@@ -1,13 +1,22 @@
 :root {
-    --primary-color: #111418;
+    /* --primary-color: #111418; */
+    --primary-color: rgba(0, 0, 0, 0);
 }
 
-
 html, body {
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background-image: url("/assets?image=background.png");
     color: white;
     overflow: hidden;
-    position: fixed;
+    /* position: fixed; */
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 .vsep90 {
@@ -20,6 +29,8 @@ html, body {
 }
 
 .container {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     position: fixed;
     height: 90vh;
     width: 95vw;
@@ -43,6 +54,10 @@ html, body {
     width: 200px;
     border: solid 1px white;
     border-radius: 20px;
+}
+
+.item > div {
+    padding-bottom: 0.5rem;
 }
 
 .optionSquare {
@@ -95,7 +110,7 @@ html, body {
     margin-right: .5rem;
 }
 .text > p:first-child {
-    color: red;
+    color: yellow;
 }
 
 .subsection {
@@ -103,10 +118,13 @@ html, body {
     flex-wrap: wrap;
     flex-direction: row;
     overflow-y: auto;
+    justify-content: center;
 }
 
 #checkout-list {
-    flex-direction: column;
+    /* wtf? */
+    align-content: flex-start;
+    /* flex-direction: column;  */
 }
 
 
@@ -122,16 +140,18 @@ html, body {
 }
 
 .popup {
-    -webkit-backdrop-filter: brightness(50%) blur(5px);
-    backdrop-filter: brightness(50%) blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     align-items: center;
     justify-content: center;
 }
 
 #checkout-menu {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.3);
     width: 80vw;
     height: 80vh;
-    background-color: var(--primary-color);
     border: solid 1px white;
     border-radius: 20px;
     display: flex;
@@ -142,6 +162,10 @@ html, body {
 #checkout-menu > .subcontainer {
     width: 40vw;
     height: 75vh;
+}
+
+#recept {
+    overflow-y: auto;
 }
 
 #receipt > .item, .itemSlim {

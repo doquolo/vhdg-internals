@@ -8,7 +8,7 @@
     <script src="{{ url_for('static', filename='js/index.js')}}"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container center">
         <div class="subcontainer" id="menu-section">
             <div class="subsection" id="menu-list">
                 <!-- <div class="item" onclick="addToList(this, 1)">Gà nướng</div>
@@ -28,13 +28,13 @@
                 </div>
                 <div class="item header">
                     <div class="text">Tổng đơn</div>
-                    <div class="price">0.000đ</div>
+                    <div class="price">0</div>
                 </div>
             </div>
             <div class="subsection button" id="checkout-button" onclick="showCheckout()">Thanh toán</div>
         </div>
     </div>
-    <div class="container popup" style="display: none;">
+    <div class="container popup center" style="display: none;">
         <div id="checkout-menu">
             <div class="subcontainer" style="justify-content: space-between;">
                 <div id="receipt">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="item header">
                         <div class="text">Tổng đơn</div>
-                        <div class="price">0.000đ</div>
+                        <div class="price">0</div>
                     </div>
                 </div>
                 <div id="payment-method" style="display: flex;">

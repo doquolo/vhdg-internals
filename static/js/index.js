@@ -22,7 +22,9 @@ async function initList() {
     const list = await request.json();
     for (let i in list) {
         menu_list.innerHTML += `
-        <div class="item" onclick="addToList(this, ${i})" style="background-image: url('/assets?image=${i}.png')">${list[i]}</div>
+        <div class="item" onclick="addToList(this, ${i})" style="background-image: url('/assets?image=${i}.png')">
+            <div>${list[i]}</div>
+        </div>
         `;
     }
 }
@@ -68,6 +70,15 @@ async function updateReceipt() {
 }
 
 async function prepareList(list_object) {
+
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      
+        minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+        maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+      });
+
     list_object.innerHTML = `<div class="item header">
     <div class="text">Món ăn</div>
     <div class="price">Đơn giá</div>
@@ -83,8 +94,8 @@ async function prepareList(list_object) {
         `
         <div class="item" onclick="substractFood(${i})">
             <div class="text"><p>x${foodlist[i]["amount"]}</p><p>${foodlist[i]["name"]}</p></div>
-            <div class="price">${price}.000đ</div>
-            <div class="price">${subtotal}.000đ</div>
+            <div class="price">${formatter.format(price*1000)}</div>
+            <div class="price">${formatter.format(subtotal*1000)}</div>
         </div>
         `
     }
@@ -92,7 +103,7 @@ async function prepareList(list_object) {
         `
     <div class="item header">
         <div class="text">Tổng đơn</div>
-        <div class="price" id="sum">${total}.000đ</div>
+        <div class="price" id="sum">${formatter.format(total*1000)}</div>
     </div>
         `;
     sum = total; // for later access
@@ -107,6 +118,8 @@ const showCheckout = () => {
         alert("Hoá đơn không được để trống !");
     } else {
         document.querySelector("body > div.container.popup").style.display = "flex"
+        // clear out old transition data
+        document.querySelector("#payment-info").innerHTML = "";
         updateReceipt();
     }
 }
