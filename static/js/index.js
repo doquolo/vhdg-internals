@@ -140,7 +140,7 @@ const handleCash = () => {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({mode: "cash", id: id, data: foodlist})
+        body: JSON.stringify({mode: "cash", id: id, discount: discount, data: foodlist})
     }).then(res => res.json())
     .then(res => console.log(res));
 
@@ -164,7 +164,7 @@ const handleContactless = () => {
         <img id="qrcode" src="https://img.vietqr.io/image/${beneficial_acc.bank_bin}-${beneficial_acc.acc_num}-${receipt_info.type}.jpg?amount=${receipt_info.amount}&addInfo=${receipt_info.id}&accountName=${receipt_info.acc_name}" alt="">
         <input type="file" name="file" accept="image/*">
         <br>
-        <textarea name="json_data" id="json_data" style="display: none;">${JSON.stringify({mode: "contactless", id: id, data: foodlist})}</textarea>
+        <textarea name="json_data" id="json_data" style="display: none;">${JSON.stringify({mode: "contactless", id: id, discount: discount, data: foodlist})}</textarea>
         <br>
         <input type="submit" value="Tải lên" onclick="this.form.submit(); alert('Đã lưu giao dịch chuyển khoản!'); location.redirect('/');">
     </form>
