@@ -1,5 +1,6 @@
 var foodlist = {}
 var sum = 0
+var discount = 0
 
 document.addEventListener("DOMContentLoaded", () => {
     initList();
@@ -84,7 +85,9 @@ async function prepareList(list_object) {
     <div class="price">Đơn giá</div>
     <div class="price">Tổng</div>
 </div>`;
-    var total = 0;
+    // var total = 0;
+    // let total be negative of discount so it would take effect even before calculation
+    var total = -1 * discount; // this would be zero if discount is zero
     for (let i in foodlist) {
         const price = await (await fetch(`/price?id=${i}`)).json();
         const subtotal = Number(foodlist[i]["amount"]) * price;
@@ -100,7 +103,11 @@ async function prepareList(list_object) {
         `
     }
     list_object.innerHTML += 
-        `
+    `
+    <div class="item header">
+        <div class="text">Giảm giá</div>
+        <div class="price" id="sum">${formatter.format(discount*1000)}</div>
+    </div>
     <div class="item header">
         <div class="text">Tổng đơn</div>
         <div class="price" id="sum">${formatter.format(total*1000)}</div>
@@ -117,6 +124,7 @@ const showCheckout = () => {
     if (JSON.stringify(foodlist) === "{}") {
         alert("Hoá đơn không được để trống !");
     } else {
+        discount = Number(prompt("Nhập mã giảm giá (để trống nếu không thêm): "));
         document.querySelector("body > div.container.popup").style.display = "flex"
         // clear out old transition data
         document.querySelector("#payment-info").innerHTML = "";
