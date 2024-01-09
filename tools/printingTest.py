@@ -1,3 +1,2 @@
 import os
-
-os.startfile("receipttest.html", "print")
+os.startfile("out.pdf", "print")
