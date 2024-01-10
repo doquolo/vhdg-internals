@@ -78,7 +78,7 @@ def print_bill(bill):
     converter = subprocess.run([path_to_converter, path_to_input_file, path_to_output_file])
 
     # print
-    path_to_printer = r"tools\printer\pdftoprinter\PDFtoPrinterSelect.exe"
+    path_to_printer = r"tools\printer\pdftoprinter\PDFtoPrinter.exe"
     printer = subprocess.run([path_to_printer, path_to_output_file, "/s"])
 
 
