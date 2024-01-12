@@ -45,6 +45,11 @@ template = '''
         {payment_list}
         <tr>
             <td style="border-right: none;"></td>
+            <td style="text-align: right; border-left: none; font-weight: 600;">Giảm giá</td>
+            <td>{discount}</td>
+        </tr>
+        <tr>
+            <td style="border-right: none;"></td>
             <td style="text-align: right; border-left: none; font-weight: 600;">Tổng đơn</td>
             <td>{sum}</td>
         </tr>

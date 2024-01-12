@@ -62,7 +62,8 @@ def print_bill(bill):
         datetime=datetime.datetime.fromtimestamp(int(bill["id"]) / 1e3), 
         payment_method=("Tiền mặt" if bill["mode"] == "cash" else "Chuyển khoản"),
         payment_list=list,
-        sum=f"{sum}.000đ"
+        discount=f"{bill['discount']}.000đ",
+        sum=f"{sum - bill['discount']}.000đ"
     )
 
     with open("temp.html", "w", encoding="utf-8") as file:
