@@ -79,7 +79,7 @@ def print_bill(bill):
 
     # print
     path_to_printer = r"tools\printer\pdftoprinter\PDFtoPrinter.exe"
-    printer = subprocess.run([path_to_printer, path_to_output_file, "/s"])
+    printer = subprocess.run([path_to_printer, path_to_output_file, "pages=1,1"])
 
 
 @app.route('/pay', methods=['POST'])
